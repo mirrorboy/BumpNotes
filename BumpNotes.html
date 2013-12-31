@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			BumpNotes
+		</title>
+		<script type="text/javascript">
+			var notes = [
+							{id:1, text:"get milk"},
+							{id:2, text:"do homework"}
+						];
+		</script>
+	</head>
+	<body>
+		<h2>BumpNotes - Notes for Lazy People</h2>
+		<input id="notetext" type="text" onkeypress="return addNote(event)"/>
+		<div class="all-notes">
+		</div>
+		<script type="text/javascript">
+			function addNote(e) {
+				if (e.keyCode == 13){				
+					//Add new note
+					notes.push({id:notes[notes.length-1].id+1, text: document.querySelector("#notetext").value});
+					//Clear the textbox
+					document.querySelector("#notetext").value = "";
+				}
+				refreshNotes();	
+			}
+
+			function refreshNotes() {
+				var notesArea = document.querySelector(".all-notes");
+				var notesHTML = "<table>";
+				for (var i = notes.length - 1; i >= 0; i--) {				   
+				   notesHTML += "<tr><td>" + notes[i].text + "</td></tr>";
+				};	
+				notesArea.innerHTML = notesHTML + "</table>";
+			}
+
+			document.onload(refreshNotes());
+
+		</script>
+	</body>
+</html>
