@@ -5,6 +5,7 @@
 		<title>
 			BumpNotes
 		</title>
+		<link rel="stylesheet" type="text/css" href="simpleGrid.css">
 		<script type="text/javascript">
 			var notes = [
 							{id:1, text:"get milk"},
@@ -13,9 +14,13 @@
 		</script>
 	</head>
 	<body>
-		<h2>BumpNotes - Notes for Lazy People</h2>
-		<input id="notetext" type="text" onkeypress="return addNote(event)"/>
-		<div class="all-notes">
+		<div class="grid grid-pad">
+			<div class='col-1-1'>
+				<h2>BumpNotes - Notes for Lazy People</h2>
+				<input id="notetext" type="text" onkeypress="return addNote(event)"/>
+				<div class='content'>
+				</div>	
+			</div>		
 		</div>
 		<script type="text/javascript">
 			function addNote(e) {
@@ -24,12 +29,13 @@
 					notes.push({id:notes[notes.length-1].id+1, text: document.querySelector("#notetext").value});
 					//Clear the textbox
 					document.querySelector("#notetext").value = "";
+					refreshNotes();
 				}
-				refreshNotes();	
+					
 			}
 
 			function refreshNotes() {
-				var notesArea = document.querySelector(".all-notes");
+				var notesArea = document.querySelector(".content");
 				var notesHTML = "<table>";
 				for (var i = notes.length - 1; i >= 0; i--) {				   
 				   notesHTML += "<tr><td>" + notes[i].text + "</td></tr>";
